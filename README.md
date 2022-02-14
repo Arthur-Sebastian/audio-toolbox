@@ -1,4 +1,5 @@
 # AudioToolbox
+### Released into the public domain.
 A collection of audio related tools written in bash.
 
 ## Dependencies
@@ -51,3 +52,6 @@ Note: Argument [quality] has a default value of 0 which corresponds to
 220-260 kbit/s VBR encoding.<br> 
 See [this article](https://wiki.hydrogenaudio.org/index.php?title=LAME#Recommended_encoder_settings) for more information.
 
+## Disclaimer
+I do not condone the usage of any of those tools for illicit purposes. Please use the provided tools (especially flacrip) only for your own, personal use.
+Content piracy and redistribution may be punishable by law, consult your local authorities for more information.

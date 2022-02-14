@@ -19,9 +19,10 @@ Notes:
 ## Available tools
 ### flacrip
 Used to rip audio files via raw soundcard output. Creates 16bit, 44.1kHz nicely clipped FLAC files,
-with added relevant metadata.<br> 
+with added relevant metadata.<br>
 Clips leading and trailing silence out of the recording automatically.<br>
-Usage:
+Usage:<br>
+Start the tool:
 > flacrip [artist] [title] [album]
 
 Arguments:
@@ -30,6 +31,12 @@ Arguments:
 - album: Musical album name
 
 Note: If an argument is not set, it will be substituted by "Unknown".
+
+General usage:<br>
+- Select the appropriate recording audio source.
+- Wait for a timestamp status information.
+- Play your audio from a CD, or a streaming service.
+- Press Q to stop ripping.
 
 ### audioclip
 Used to clip silence out of audio files.<br>

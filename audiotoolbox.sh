@@ -37,4 +37,20 @@ audioclip(){
 	rm "temp_$1"
 }
 
-
+flacer(){
+	echo Do you want a funny version? [y/N]
+	read $opt;
+	
+	if [ "$opt" == "N" ]; then
+	ffmpeg -hide_banner -i "$1" -c:a flac -af aformat=s16:44100 "${1%.*}.flac"
+	echo -e "\e[1;33mConversion complete: "${1%.*}.flac" in $PWD\e[0m"
+	fi
+	
+	if [ "$opt" == "y" ]; then
+	NAME=${1%.*}
+	ffmpeg -hide_banner -i "$1" -c:a flac -af aformat=s16:44100 "${1%.*}.flac"
+	if [[ -f $NAME.flac ]]; then
+	cowsay -f dragon "Conversion complete: $NAME.flac in $PWD" | lolcat
+	fi
+	fi
+}

@@ -37,4 +37,9 @@ audioclip(){
 	rm "temp_$1"
 }
 
-
+flacer(){
+	ffmpeg -hide_banner -i "$1" -c:a flac -af aformat=s16:44100 "${1%.*}.flac"
+	if [[ -f $NAME.flac ]]; then
+	echo -e "\e[1;33mConversion complete: "${1%.*}.flac" in $PWD\e[0m"
+	fi
+}

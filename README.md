@@ -59,6 +59,14 @@ Note: Argument [quality] has a default value of 0 which corresponds to
 220-260 kbit/s VBR encoding.<br> 
 See [this article](https://wiki.hydrogenaudio.org/index.php?title=LAME#Recommended_encoder_settings) for more information.
 
+### flacer
+A script converting various audio files into a standard 16bit/44.1kHz flac format.<br>
+Usage:
+> flacer [filepath]
+
+Arguments:
+- filepath: path to the audio file to be converted 
+
 ## Disclaimer
 I do not condone the usage of any of those tools for illicit purposes. Please use the provided tools (especially flacrip) only for your own, personal use.
 Content piracy and redistribution may be punishable by law, consult your local authorities for more information.

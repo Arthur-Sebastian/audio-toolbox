@@ -69,8 +69,7 @@ Arguments:
 
 
 ### flactag
-Tool for metadata addition or edition for flac files, automatically naming the file as follows:
->[Artist] - [Title].flac<br>
+Tool for metadata addition or edition for flac files, automatically naming the file as follows:  [Artist] - [Title].flac<br>
 
 Usage:
 > flactag [image] [image]

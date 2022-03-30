@@ -43,3 +43,33 @@ flacer(){
 	echo -e "\e[1;33mConversion complete: "${1%.*}.flac" in $PWD\e[0m"
 	fi
 }
+
+flactag(){
+	filePath="${1:-Unknown}"
+	if test -f "$filePath"; then
+	picturePath="${2:-Unknown}"
+	echo -e "\e[1;33mRemoving old metadata...\e[0m"
+	metaflac --remove-all "$filePath"
+	echo -e "\e[1;33mSet new tags:\e[0m"
+	echo -e "Artist:"
+	read artist
+	echo -e "Title:"
+	read title
+	echo -e "Album:"
+	read album
+	metaflac --set-tag ARTIST="$artist" "$filePath"
+	metaflac --set-tag=TITLE="$title" "$filePath"
+	metaflac --set-tag=ALBUM="$album" "$filePath"
+	mv "$filePath" "./$artist - $title.flac"
+	if ! [ -z "$2" ]; then
+	if test -f "$picturePath"; then
+	metaflac --import-picture-from="./$picturePath" "./$artist - $title.flac"
+	else
+	echo -e "\e[1;31mGiven image file does not exsist!\e[0m"
+	fi
+	fi
+	echo -e "\e[1;32mNew tags set! Saved file:\e[0m\n\e[1;33m$artist - $title \e[0m"
+	else
+	echo -e "\e[1;31mGiven .flac file does not exsist!\e[0m"
+	fi
+}

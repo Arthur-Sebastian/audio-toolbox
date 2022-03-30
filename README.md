@@ -65,7 +65,21 @@ Usage:
 > flacer [filepath]
 
 Arguments:
-- filepath: path to the audio file to be converted 
+- filepath: path to the audio file to be converted
+
+### flactag
+Tool for metadata addition or editoin of flac filesm, automatically naming the file:
+>[Artist] - [Title]<br>
+
+Usage:
+> flactag [filepath of flac] [filepath of image]
+
+Arguments:
+- filepath of flac: location of the audio file
+- filepath of image: location of the image that will be set as an album conver. It can be both of jpg and png formats and have any aspect ratio.
+
+Provided with both filepaths, the script will change both text and image metadata.
+If only the flac file is given, only the text tags will be changed.
 
 ## Disclaimer
 I do not condone the usage of any of those tools for illicit purposes. Please use the provided tools (especially flacrip) only for your own, personal use.

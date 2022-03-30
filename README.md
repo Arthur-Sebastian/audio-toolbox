@@ -81,6 +81,6 @@ Arguments:
 Note: Provided with both filepaths, the script will change both text and image metadata.
 Given only the flac filepath, only text tags will be modified.
 
-### Disclaimer
+## Disclaimer
 I do not condone the usage of any of those tools for illicit purposes. Please use the provided tools (especially flacrip) only for your own, personal use.
 Content piracy and redistribution may be punishable by law, consult your local authorities for more information.

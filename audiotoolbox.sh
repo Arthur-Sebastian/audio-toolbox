@@ -46,8 +46,15 @@ flacer(){
 
 flactag(){
 	filePath="${1:-Unknown}"
-	if test -f "$filePath"; then
+	if [[ -f "$filePath" ]]; then
+	if [[ $filePath == *.flac ]]; then
 	picturePath="${2:-Unknown}"
+	ffprobe -hide_banner "$filePath"
+	while true; do
+	echo -e "\e[1;33mDo you want to remove this metadata? [y/N] \e[0m"
+	read opt
+	case $opt in
+	y|Y|"")
 	echo -e "\e[1;33mRemoving old metadata...\e[0m"
 	metaflac --remove-all "$filePath"
 	echo -e "\e[1;33mSet new tags:\e[0m"
@@ -63,13 +70,22 @@ flactag(){
 	mv "$filePath" "./$artist - $title.flac"
 	if ! [ -z "$2" ]; then
 	if test -f "$picturePath"; then
-	metaflac --import-picture-from="./$picturePath" "./$artist - $title.flac"
+	metaflac --import-picture-from="$picturePath" "./$artist - $title.flac"
 	else
 	echo -e "\e[1;31mGiven image file does not exsist!\e[0m"
 	fi
 	fi
-	echo -e "\e[1;32mNew tags set! Saved file:\e[0m\n\e[1;33m$artist - $title \e[0m"
+	echo -e "\e[1;32mNew tags set! Saved file:\e[0m\n\e[1;33m$artist - $title.flac\e[0m"
+	return 0 ;;
+	n|N)
+	echo -e "Aborting" 
+	return 0 ;;
+	esac
+	done
 	else
-	echo -e "\e[1;31mGiven .flac file does not exsist!\e[0m"
+	echo -e "\e[1;31mWrong format!\e[0m"
+	fi
+	else
+	echo -e "\e[1;31mFile doesn't exist!\e[0m"
 	fi
 }

@@ -67,6 +67,17 @@ Usage:
 Arguments:
 - filepath: path to the audio file to be converted 
 
+### flactag
+Tool for metadata addition or edition for flac files, automatically naming the file as follows:  
+>[Artist] - [Title].flac
+
+Usage:
+> flactag [audio] [image]
+
+Arguments:
+- audio: path to the flac file that will have its metadata changed
+- image: path of the image to be assigned to the flac, can be both jpg and png, in any acpect rato.
+  
 ## Disclaimer
 I do not condone the usage of any of those tools for illicit purposes. Please use the provided tools (especially flacrip) only for your own, personal use.
 Content piracy and redistribution may be punishable by law, consult your local authorities for more information.

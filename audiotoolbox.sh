@@ -66,7 +66,7 @@ flactag(){
 		return 0
 	fi
 
-	if [ -z "$2" ]; then
+	if [ -z $2 ]; then
 		echo -e "\e[1;31mImage file not provided!\e[0m"
 		return 0
 	fi

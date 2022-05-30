@@ -72,11 +72,11 @@ Tool for metadata addition or edition for flac files, automatically naming the f
 >[Artist] - [Title].flac
 
 Usage:
-> flactag [image] [image]
+> flactag [audio] [image]
 
 Arguments:
-- flac location: path to the audio file that will have its metadata changed
-- image location: path of the image to be assigned to the flac, can be both jpg and png, in any acpect rato.
+- audio: path to the flac file that will have its metadata changed
+- image: path of the image to be assigned to the flac, can be both jpg and png, in any acpect rato.
   
 Note: Provided with both filepaths, the script will change both text and image metadata.
 Given only the flac filepath, only text tags will be modified.

@@ -78,9 +78,6 @@ Arguments:
 - audio: path to the flac file that will have its metadata changed
 - image: path of the image to be assigned to the flac, can be both jpg and png, in any acpect rato.
   
-Note: Provided with both filepaths, the script will change both text and image metadata.
-Given only the flac filepath, only text tags will be modified.
-
 ## Disclaimer
 I do not condone the usage of any of those tools for illicit purposes. Please use the provided tools (especially flacrip) only for your own, personal use.
 Content piracy and redistribution may be punishable by law, consult your local authorities for more information.

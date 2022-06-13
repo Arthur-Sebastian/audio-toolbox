@@ -40,52 +40,78 @@ audioclip(){
 flacer(){
 	ffmpeg -hide_banner -i "$1" -c:a flac -af aformat=s16:44100 "${1%.*}.flac"
 	if [[ -f $NAME.flac ]]; then
-	echo -e "\e[1;33mConversion complete: "${1%.*}.flac" in $PWD\e[0m"
+		echo -e "\e[1;33mConversion complete: "${1%.*}.flac" in $PWD\e[0m"
 	fi
 }
 
 flactag(){
+	
 	filePath="${1:-Unknown}"
-	if [[ -f "$filePath" ]]; then
-	if [[ $filePath == *.flac ]]; then
 	picturePath="${2:-Unknown}"
+
+
+	if ! [[ -f $filePath ]]; then
+		echo -e "\e[1;31mGiven file does not exist!\e[0m"
+		return 0
+	fi
+
+	if ! [[ $filePath == *.flac ]]; then
+		echo -e "\e[1;31mWrong audio file format!\e[0m"
+		return 0
+	fi
+
+	if [ -z $2 ]; then
+		echo -e "\e[1;31mImage file not provided!\e[0m"
+		return 0
+	fi
+
+	if ! [[ -f $picturePath ]]; then
+		echo -e "\e[1;31mImage file does not exist!\e[0m"
+		return 0
+	fi
+
+	if ! ([[ $picturePath == *.png ]] || [[ $picturePath == *.jpg ]] || [[ $picturePath == *.jpeg ]]); then
+		echo -e "\e[1;31mWrong image file format!\e[0m"
+		return 0
+	fi
+
+
 	ffprobe -hide_banner "$filePath"
 	while true; do
-	echo -e "\e[1;33mDo you want to remove this metadata? [y/N] \e[0m"
-	read opt
-	case $opt in
-	y|Y|"")
-	echo -e "\e[1;33mRemoving old metadata...\e[0m"
-	metaflac --remove-all "$filePath"
-	echo -e "\e[1;33mSet new tags:\e[0m"
-	echo -e "Artist:"
-	read artist
-	echo -e "Title:"
-	read title
-	echo -e "Album:"
-	read album
-	metaflac --set-tag ARTIST="$artist" "$filePath"
-	metaflac --set-tag=TITLE="$title" "$filePath"
-	metaflac --set-tag=ALBUM="$album" "$filePath"
-	mv "$filePath" "./$artist - $title.flac"
-	if ! [ -z "$2" ]; then
-	if test -f "$picturePath"; then
-	metaflac --import-picture-from="$picturePath" "./$artist - $title.flac"
-	else
-	echo -e "\e[1;31mGiven image file does not exsist!\e[0m"
-	fi
-	fi
-	echo -e "\e[1;32mNew tags set! Saved file:\e[0m\n\e[1;33m$artist - $title.flac\e[0m"
-	return 0 ;;
-	n|N)
-	echo -e "Aborting" 
-	return 0 ;;
+
+		echo -e "\e[1;33mDo you want to remove this metadata? [y/n] \e[0m"
+		read opt
+
+		case $opt in
+		y|Y|"")
+			echo -e "\e[1;33mRemoving old metadata...\e[0m"
+			metaflac --remove-all "$filePath"
+
+			echo -e "\e[1;33mSet new tags:\e[0m"
+			echo -e "Artist:"
+			read artist
+			echo -e "Title:"
+			read title
+			echo -e "Album:"
+			read album
+
+			metaflac --set-tag ARTIST="$artist" "$filePath"
+			metaflac --set-tag=TITLE="$title" "$filePath"
+			metaflac --set-tag=ALBUM="$album" "$filePath"
+			mv "$filePath" "./$artist - $title.flac"
+
+			metaflac --import-picture-from="$picturePath" "./$artist - $title.flac"
+
+			echo -e "\e[1;32mNew tags set! Saved file:\e[0m\n\e[1;33m$artist - $title.flac\e[0m"
+			return 0 ;;
+			
+		n|N)
+			echo -e "\e[1;33mAborting...\e[0m" 
+			return 0 ;;
+
+		*)
+			echo -e "\e[1;31mInvalid option!\e[0m"
+
 	esac
 	done
-	else
-	echo -e "\e[1;31mWrong format!\e[0m"
-	fi
-	else
-	echo -e "\e[1;31mFile doesn't exist!\e[0m"
-	fi
 }

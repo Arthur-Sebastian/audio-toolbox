@@ -45,7 +45,6 @@ flacer(){
 }
 
 flactag(){
-	
 	filePath="${1:-Unknown}"
 	picturePath="${2:-Unknown}"
 
@@ -115,3 +114,27 @@ flactag(){
 	esac
 	done
 }
+
+nurip(){
+	cover="$1"
+
+	echo -e "\e[1;36mPlease select a capture device:\e[0m"
+    column -t <<< $(pactl list sources short)  
+	read deviceId
+
+	echo -e "\e[1;33mPreparing to rip"
+	echo -e "\e[1;31m[!] Press Q to end capturing [!]\e[0m"
+	echo -e "\e[1;36mPlease wait...\e[0m"
+	sleep 1
+
+	ffmpeg -hide_banner -f pulse -ar 44100 -sample_fmt s16 -i $deviceId "temp.wav"
+
+    flacer temp.wav
+    rm temp.wav
+
+    ffmpeg -i temp.flac -af "silenceremove=1:0:-50dB,adelay=500|500" output.flac
+    rm temp.flac
+    
+    flactag output.flac "$cover"
+}
+
